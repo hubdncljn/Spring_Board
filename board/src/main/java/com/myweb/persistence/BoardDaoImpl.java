@@ -3,16 +3,14 @@ package com.myweb.persistence;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.myweb.domain.BoardVO;
 import com.myweb.domain.PageVO;
+
 @Repository
 public class BoardDaoImpl implements BoardDao {
-	private static Logger logger = LoggerFactory.getLogger(BoardDaoImpl.class);
 	private final String NS = "BoardMapper.";
 	
 	@Autowired

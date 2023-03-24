@@ -7,11 +7,13 @@
  	<insert id="regist" parameterType="bvo">
         insert into board(bno, title, content, writer) values (seq_board_bno.nextval, #{title}, #{content}, #{writer})
     </insert>
-    <!-- 목록 조회 -->
+    
+    <!-- 목록 조회 페이징(X) -->
     <select id="getList" resultType="bvo">
     	select * from board
     </select>
-    <!-- 목록 조회 페이징 -->
+    
+    <!-- 목록 조회 페이징(O) -->
     <select id="getListPaging" parameterType="pgvo" resultType="bvo">
     	<![CDATA[
         select bno, title, content, writer, regdate, moddate from(
@@ -20,6 +22,7 @@
         where rn > (#{pageNum} -1) * #{amount}
     	]]>
     </select>
+    
     <!-- 총 게시글 수 -->
     <select id="totalCount" resultType="int">
     	select count(*) from board

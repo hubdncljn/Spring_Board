@@ -1,4 +1,15 @@
--- 게시판 테이블 생성
+-- 오라클 접속
+sqlplus
+sys /as sysdba
+oracle
+
+-- 유저 생성
+create user board identified by oracle;
+
+-- 권한 부여
+grant connect, resource, dba to board;
+
+-- 테이블 생성
 create table board(
     bno NUMBER(10),
     title varchar2(150) not null,
@@ -9,6 +20,7 @@ create table board(
     constraint pk_board PRIMARY key(bno)
 );
 
+-- 시퀀스 생성
 create sequence seq_board_bno
 start with 1
 increment by 1
