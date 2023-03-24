@@ -1,137 +1,88 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>게시판</title>
-<style>
-h2 {
-	text-align: center;
-}
-.pageInfo_area {
-	text-align: center;
-}
-.pageInfo {
-	list-style: none;
-	margin-left: auto;
- 	margin-right: auto;
- 	display: inline-block;
-}
-.pageInfo li {
-	float: left;
-	font-size: 20px;
-	margin-left: 25px;
-	padding: 7px;
-	font-weight: 500;
-}
-a:link {
-	color: black;
-	text-decoration: none;
-}
-a:visited {
-	color: black;
-	text-decoration: none;
-}
-a:hover {
-	color: black;
-	text-decoration: underline;
-}
-.active {
-	background-color: #ffdcdc;
-}
-table {
- 	margin-left: auto;
- 	margin-right: auto;
-    width: 50%;
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-th, td {
-    border: 1px solid black;
-    padding: 10px;
-    text-align: center;
-}
-.btn {
-	text-align: center;
-}
-</style>
-</head>
-<body>
-<h2 class="float-left">게시판</h2>
-<div class="btn">
-	<a href="/board/regist">등록</a>
-</div>
-<table class="table">
-	<thead>
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>내용</th>
-			<th>등록일</th>
-			<th>수정일</th>
-		</tr>
-	</thead>
-	<c:choose>
-		<c:when test="${list.size() ne 0 }">
-			<tbody>
-				<c:forEach items="${list }" var="bvo">
-					<tr>
-						<td>${bvo.bno }</td>
-						<td>${bvo.title }</td>
-						<td>${bvo.writer }</td>
-						<td>${bvo.content }</td>
-						<td><fmt:formatDate pattern="yyyy.MM.dd" value="${bvo.regdate}" /></td>
-						<td><fmt:formatDate pattern="yyyy.MM.dd" value="${bvo.moddate}" /></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</c:when>
-		<c:otherwise>
-			<tbody>
-				<tr>
-					<td colspan="6" class="text-center">
-						<h3>등록된 게시글이 없습니다.</h3>
-					</td>
-				</tr>
-			</tbody>
-		</c:otherwise>
-	</c:choose>
-</table>
-<div class="pageInfo_wrap">
-	<div class="pageInfo_area">
-		<ul id="pageInfo" class="pageInfo">
-			<!-- 이전페이지 버튼 -->
-			<c:if test="${pageMaker.prev}">
-				<li class="pageInfo_btn previous">
-					<a href="/board/list?pageNum=${pageMaker.startPage-1}">이전</a>
-				</li>
-			</c:if>
-			
-			<!-- 각 페이지 버튼 -->
-			<c:forEach var="num" begin="${pageMaker.startPage}"
-				end="${pageMaker.endPage}">
-				<li class="pageInfo_btn ${pageMaker.page.pageNum == num ? "active":"" }">
-					<a href="/board/list?pageNum=${num}">${num}</a>
-				</li>
-			</c:forEach>
-			
-			<!-- 다음페이지 버튼 -->
-			<c:if test="${pageMaker.next}">
-				<li class="pageInfo_btn next">
-					<a href="/board/list?pageNum=${pageMaker.endPage + 1 }">다음</a>
-				</li>
-			</c:if>
-		</ul>
-	</div>
-</div>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:include page="/resources/include/head.jsp" />
 <script>
 	$(document).ready(function() {
-		
+		$('header .header .menu li:nth-child(1)').addClass('on');
 	});
 </script>
-</body>
-</html>
+<section class="">
+	<div class="container ">
+		<div class="title clearfix">
+			<h1 class="font_title">게시판</h1>
+		</div>
+		<div class="has_fixed_title contwrap">
+			<div class="clearfix2 search_box">
+				<p>총 ${totalCount }</p>
+				<div class="clearfix2 input_box">
+					<input type="text" placeholder="제목 검색">
+					<button type="button" class="btn border_btn">검색</button>
+				</div>
+			</div>
+			<table class="list_table table_fixed">
+				<colgroup>
+					<col width="70%">
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+				</colgroup>
+				<thead>
+					<tr class="tr_center">
+						<th>제목</th>
+						<th>작성자</th>
+						<th>조회수</th>
+						<th>등록일</th>
+					</tr>
+				</thead>
+				<c:choose>
+					<c:when test="${list.size() ne 0 }">
+						<tbody>
+							<c:forEach items="${list }" var="bvo">
+								<tr class="tr_center" onclick="location.href='/board/detail?bno=${bvo.bno }'">
+									<td class="clearfix comment_txt">
+										<p class="ellipsis">${bvo.title }</p> <span>(3)</span>
+									</td>
+									<td>${bvo.writer }</td>
+									<td>${bvo.readcount }</td>
+									<td><fmt:formatDate pattern="yyyy-MM-dd" value="${bvo.regdate}" /></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</c:when>
+					<c:otherwise>
+						<tbody>
+							<tr class="nodata">
+								<td colspan="4" class="centerT">데이터가 없습니다.</td>
+							</tr>
+						</tbody>
+					</c:otherwise>
+				</c:choose>
+			</table>
+			<div class="">
+				<button type="button" class="submit_btn"
+					onclick="location.href='/board/regist'">글쓰기</button>
+			</div>
+			<div class="pagination">
+				<ul class="clearfix">
+					<!-- 이전페이지 버튼 -->
+					<c:if test="${pageMaker.prev}">
+						<li><a href="/board/list?pageNum=${pageMaker.startPage-1}"><img
+								src="/resources/img/back_arrow.png" alt="전 페이지로"></a></li>
+					</c:if>
+					<!-- 각 페이지 버튼 -->
+					<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+						<li><a href="/board/list?pageNum=${num}" class="${pageMaker.page.pageNum == num ? "active":"" }">${num}</a></li>
+					</c:forEach>
+					<!-- 다음페이지 버튼 -->
+					<c:if test="${pageMaker.next}">
+						<li><a href="/board/list?pageNum=${pageMaker.endPage + 1 }"><img
+								src="/resources/img/front_arrow.png" alt="다음 페이지로"></a></a></li>
+					</c:if>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+<jsp:include page="/resources/include/footer.jsp" />

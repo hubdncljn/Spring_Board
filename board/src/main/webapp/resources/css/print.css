@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+@media print {
+	*{ color-adjust: exact;  -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .no_print {display:none;}
+	header {display: none; }
+	.left_header {display: none;}
+	input[type="text"] {border: none;}
+	input[type="text"], input[type="password"], input[type="number"], select {height: 30px;}
+	th, td {padding: 5px;}
+	.container {margin: 0; }
+	.print_area {width: 290mm;height: 297mm;}
+	.print_title {font-size: 40px !important;}
+	.print_area table {min-width: 0; border: 1px solid #ccc;}
+	.print_area tr {text-align: center;}
+	.print_area th {width: 10% !important; font-size: 25px; text-align: center; background: #eee !important; border-right: 1px solid #ccc;}
+	.print_area td {width: 40% !important;  font-size: 20px; border-right: 1px solid #ccc;}
+	.print_area td.leftT {text-align: left !important; border-right: 1px solid #ccc;}
+	.print_area td.date {font-weight: bold;}
+}
+
+@page {
+    size: a4;
+	margin: 20px;
+    page-break-after: always; 
+    counter-increment: page;
+	
+    @top-center {
+        
+    }
+
+    @bottom-right {
+        counter-increment: page;
+        content: "Page " counter(page);
+    }
+}

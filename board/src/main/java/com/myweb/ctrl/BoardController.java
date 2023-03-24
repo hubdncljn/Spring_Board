@@ -43,6 +43,7 @@ public class BoardController {
         model.addAttribute("list", boardService.getListPaging(page));
         
         int total = boardService.totalCount();
+        model.addAttribute("totalCount" , total);
         PageMakerDTO pageMaker = new PageMakerDTO(page, total);
         model.addAttribute("pageMaker", pageMaker);
     }
@@ -68,4 +69,12 @@ public class BoardController {
 		
 		return "redirect:/board/list";
 	}
+	
+	/* 게시판 조회 */
+    @GetMapping("/detail")
+    public void boardDetailPage(int bno, Model model) {
+        
+        model.addAttribute("bvo", boardService.getDetail(bno));
+        
+    }
 }

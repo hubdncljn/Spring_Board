@@ -35,4 +35,9 @@ public class BoardServiceImpl implements BoardService {
 		return bdao.totalCount();
 	}
 
+	@Override
+	public BoardVO getDetail(int bno) {
+		return bdao.getDetail(bno);
+	}
+
 }

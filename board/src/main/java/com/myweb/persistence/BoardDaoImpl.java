@@ -36,4 +36,9 @@ public class BoardDaoImpl implements BoardDao {
 		return sql.selectOne(NS + "totalCount");
 	}
 
+	@Override
+	public BoardVO getDetail(int bno) {
+		return sql.selectOne(NS + "getDetail", bno);
+	}
+
 }

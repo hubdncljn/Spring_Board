@@ -9,6 +9,13 @@ public class BoardVO {
 	private String writer; // 게시판 작성자
 	private Date regdate; // 게시판 등록일
 	private Date moddate; // 게시판 수정일
+	private int readcount; // 조회수
+	public int getReadcount() {
+		return readcount;
+	}
+	public void setReadcount(int readcount) {
+		this.readcount = readcount;
+	}
 	public int getBno() {
 		return bno;
 	}
@@ -48,7 +55,8 @@ public class BoardVO {
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer + ", regdate="
-				+ regdate + ", moddate=" + moddate + "]";
+				+ regdate + ", moddate=" + moddate + ", readcount=" + readcount + "]";
 	}
+	
 	
 }
