@@ -1,0 +1,41 @@
+package com.myweb.persistence;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.myweb.domain.BoardVO;
+import com.myweb.domain.PageVO;
+@Repository
+public class BoardDaoImpl implements BoardDao {
+	private static Logger logger = LoggerFactory.getLogger(BoardDaoImpl.class);
+	private final String NS = "BoardMapper.";
+	
+	@Autowired
+	private SqlSession sql;
+	
+	@Override
+	public int insert(BoardVO board) {
+		return sql.insert(NS + "regist", board);
+	}
+
+	@Override
+	public List<BoardVO> getList() {
+		return sql.selectList(NS + "getList");
+	}
+
+	@Override
+	public List<BoardVO> getListPaging(PageVO pgvo) {
+		return sql.selectList(NS + "getListPaging" , pgvo);
+	}
+
+	@Override
+	public int totalCount() {
+		return sql.selectOne(NS + "totalCount");
+	}
+
+}

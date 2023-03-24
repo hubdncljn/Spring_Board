@@ -1,0 +1,15 @@
+-- 게시판 테이블 생성
+create table board(
+    bno NUMBER(10),
+    title varchar2(150) not null,
+    content varchar2(2000) not null,
+    writer varchar2(50) not null,
+    regdate date default sysdate,
+    moddate date default sysdate,
+    constraint pk_board PRIMARY key(bno)
+);
+
+create sequence seq_board_bno
+start with 1
+increment by 1
+nocycle nocache;
