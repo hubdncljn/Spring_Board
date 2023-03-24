@@ -54,10 +54,16 @@ th, td {
     padding: 10px;
     text-align: center;
 }
+.btn {
+	text-align: center;
+}
 </style>
 </head>
 <body>
 <h2 class="float-left">게시판</h2>
+<div class="btn">
+	<a href="/board/regist">등록</a>
+</div>
 <table class="table">
 	<thead>
 		<tr>
@@ -124,7 +130,6 @@ th, td {
 </div>
 <script>
 	$(document).ready(function() {
-
 		
 	});
 </script>
