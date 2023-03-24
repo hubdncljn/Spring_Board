@@ -50,7 +50,6 @@ public class BoardController {
     
     /* 게시판 등록 페이지 이동 */
 	@GetMapping("/regist")
-	// => @RequestMapping(value="regist", method=RequestMethod.GET)
 	public void boardRegistPage() {
 
 		log.info("게시판 등록 페이지");

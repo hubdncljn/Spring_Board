@@ -6,6 +6,23 @@
 <script>
 	$(document).ready(function() {
 		$('header .header .menu li:nth-child(1)').addClass('on');
+		$('#regBtn').click(function(){
+			if($("#title").val() == "" || $("#title").val() == null){
+			    alert("제목을 입력해주세요.");
+			    $("#title").focus();
+			    return false;
+			}
+			if($("#writer").val() == "" || $("#writer").val() == null){
+			    alert("작성자를 입력해주세요.");
+			    $("#writer").focus();
+			    return false;
+			}
+			if($("#content").val() == "" || $("#content").val() == null){
+			    alert("내용을 입력해주세요.");
+			    $("#content").focus();
+			    return false;
+			}
+		});
 	});
 </script>
 <section class="">
@@ -52,7 +69,7 @@
 						</div>
 					</div>
 					<div class="btn_wrap centerT mt20">
-						<button type="submit" class="submit_btn">저장</button>
+						<button type="submit" class="submit_btn" id="regBtn">저장</button>
 						<button type="button" class="submit_btn border" onclick="location.href='/board/list'">목록</button>
 					</div>
 				</form>

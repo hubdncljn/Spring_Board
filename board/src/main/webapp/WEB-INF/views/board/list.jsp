@@ -42,7 +42,7 @@
 							<c:forEach items="${list }" var="bvo">
 								<tr class="tr_center" onclick="location.href='/board/detail?bno=${bvo.bno }'">
 									<td class="clearfix comment_txt">
-										<p class="ellipsis">${bvo.title }</p> <span>(3)</span>
+										<p class="ellipsis">${bvo.title }</p> <span>(0)</span>
 									</td>
 									<td>${bvo.writer }</td>
 									<td>${bvo.readcount }</td>
@@ -78,7 +78,7 @@
 					<!-- 다음페이지 버튼 -->
 					<c:if test="${pageMaker.next}">
 						<li><a href="/board/list?pageNum=${pageMaker.endPage + 1 }"><img
-								src="/resources/img/front_arrow.png" alt="다음 페이지로"></a></a></li>
+								src="/resources/img/front_arrow.png" alt="다음 페이지로"></a></li>
 					</c:if>
 				</ul>
 			</div>
