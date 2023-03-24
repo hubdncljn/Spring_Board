@@ -59,11 +59,11 @@ public class BoardController {
 	/* 게시판 등록 */
 	@PostMapping("/regist")
 	public String boardRegist(BoardVO board, RedirectAttributes rttr) {
+		// fileUpload 추가
 		
 		log.info("BoardVO : " + board);
 		
 		boardService.register(board); // 등록
-		
 		rttr.addFlashAttribute("result", "regist success");
 		
 		return "redirect:/board/list";

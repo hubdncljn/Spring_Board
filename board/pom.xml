@@ -149,6 +149,7 @@
 			<artifactId>tika-parsers</artifactId>
 			<version>1.25</version>
 		</dependency>
+		<!-- fileUpload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>

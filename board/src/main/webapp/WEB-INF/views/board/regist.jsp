@@ -23,6 +23,45 @@
 			    return false;
 			}
 		});
+		
+		// fileUpload
+		let regExp = new RegExp("\.(exe|sh|bat|js|msi|dll)$");
+		let maxSize = 1048576; // 1 MB
+		function fileValidation(fname, fsize) {
+			if(regExp.test(fname)) {
+				alert(fname + "(은)는 허용되지 않은 파일 형식입니다. ");
+				return false;
+			}else if(fsize > maxSize) {
+				alert("1MB 이하의 파일만 허용됩니다!");
+				return false;
+			}else{
+				return true;
+			}
+		}
+		
+		$(document).on("change", "#file_up", function() {
+			$("button[type=submit]").attr("disabled", false);
+			let formObj = $("#file_up"); // 하나여도 배열로 가져옴
+			// console.log(formObj);
+			
+			let fileObjs = formObj[0].files; // file 객체들 가져옴
+			// console.log(fileObjs);
+			
+			let fileZone = $("#fileZone");
+			fileZone.html("");
+			
+			for (let fobj of fileObjs) {
+			      let li = '<li class="clearfix">';
+			      if(fileValidation(fobj.name, fobj.size)){
+			         // 성공
+			         li += '<p>' + fobj.name + '</p><button type="button" id="file_del"></button>';
+			      }else{
+			         // 실패
+			         return false;
+			      }
+			      fileZone.append(li);
+			   }
+			});
 	});
 </script>
 <section class="">
@@ -31,7 +70,7 @@
 				<h1 class="font_title">게시판</h1>
 			</div>
 			<div class="has_fixed_title detail_wrap">
-				<form action="/board/regist" method="post">
+				<form action="/board/regist" method="post" enctype="multipart/form-data">
 					<div class="write_box">
 						<div>
 							<input type="text" id="title" name="title" placeholder="제목(최대 100자)" maxlength="100">
@@ -41,19 +80,8 @@
 								<label for="file_up">파일 선택</label>
 								<p class="font_13 gray_txt">※ 파일은 최대 3개까지 총 20MB 까지 가능합니다.</p>
 							</div>
-							<ul class="clearfix file_up_list">
-								<li class="clearfix">
-									<p>이미지.jpg</p>
-									<button type="button"></button>
-								</li>
-								<li class="clearfix">
-									<p>문서123.hwp</p>
-									<button type="button"></button>
-								</li>
-								<li class="clearfix">
-									<p>이미지.jpg</p>
-									<button type="button"></button>
-								</li>
+							<ul class="clearfix file_up_list" id="fileZone">
+								<!-- fileUpload -->
 							</ul>
 						</div>
 						<div>
