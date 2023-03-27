@@ -16,11 +16,11 @@
     <!-- 목록 조회 페이징(O) -->
     <select id="getListPaging" parameterType="pgvo" resultType="bvo">
     	<![CDATA[
-        select bno, title, content, writer, regdate, moddate, readcount from(
-               select /*+INDEX_DESC(board pk_board) */ rownum  as rn, bno, title, content, writer, regdate, moddate, readcount
-               from board where rownum <= #{pageNum} * #{amount}) 
-        where rn > (#{pageNum} -1) * #{amount}
-    	]]>
+	        select bno, title, content, writer, regdate, moddate, readcount from(
+	               select /*+INDEX_DESC(board pk_board) */ rownum  as rn, bno, title, content, writer, regdate, moddate, readcount
+	               from board where rownum <= #{pageNum} * #{amount}) 
+	        where rn > (#{pageNum} -1) * #{amount}
+	    	]]>
     </select>
     
     <!-- 총 게시글 수 -->

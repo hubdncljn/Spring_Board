@@ -12,7 +12,7 @@ grant connect, resource, dba to board;
 -- 게시판 테이블 생성
 create table board(
     bno NUMBER(10),
-    title varchar2(150) not null,
+    title varchar2(400) not null,
     content varchar2(2000) not null,
     writer varchar2(50) not null,
     regdate date default sysdate,
@@ -35,6 +35,6 @@ bno number(10),
 constraint files primary key(uuid)
 );
 
--- fk
+-- 파일 fk (board bno , files bno)
 alter table files add constraint fk_file_bno
 foreign key (bno) references board (bno);
