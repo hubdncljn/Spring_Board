@@ -8,11 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myweb.domain.BoardVO;
 import com.myweb.domain.PageMakerDTO;
 import com.myweb.domain.PageVO;
+import com.myweb.orm.FileProcessor;
 import com.myweb.service.BoardService;
 
 @Controller
@@ -22,6 +25,9 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private FileProcessor fp;
 	
 //	/* 게시판 목록 페이지 이동 (페이징 X) */
 //	@GetMapping("/list")
@@ -58,12 +64,18 @@ public class BoardController {
 	
 	/* 게시판 등록 */
 	@PostMapping("/regist")
-	public String boardRegist(BoardVO board, RedirectAttributes rttr) {
-		// fileUpload 추가
+	public String boardRegist(BoardVO board, RedirectAttributes rttr,
+			@RequestParam("files") MultipartFile[] files) {
 		
 		log.info("BoardVO : " + board);
+		System.err.println("********* files length " + files.length);
 		
 		boardService.register(board); // 등록
+		
+		// fileUpload
+		if(files[0].getSize() > 0) {
+			fp.uploadFile(files, boardService.getCurrBno()); 
+		}
 		rttr.addFlashAttribute("result", "regist success");
 		
 		return "redirect:/board/list";

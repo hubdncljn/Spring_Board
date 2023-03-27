@@ -9,7 +9,7 @@ create user board identified by oracle;
 -- 권한 부여
 grant connect, resource, dba to board;
 
--- 테이블 생성
+-- 게시판 테이블 생성
 create table board(
     bno NUMBER(10),
     title varchar2(150) not null,
@@ -25,3 +25,17 @@ create sequence seq_board_bno
 start with 1
 increment by 1
 nocycle nocache;
+
+-- 파일 테이블 생성
+create table files(
+uuid varchar2(200),
+savedir varchar2(200) not null,
+fname varchar2(1000) not null,
+ftype number(1) default 0,
+bno number(10),
+constraint files primary key(uuid)
+);
+
+-- fk
+alter table files add constraint fk_file_bno
+foreign key (bno) references board (bno);

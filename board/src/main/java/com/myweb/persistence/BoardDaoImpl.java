@@ -41,4 +41,9 @@ public class BoardDaoImpl implements BoardDao {
 		return sql.selectOne(NS + "getDetail", bno);
 	}
 
+	@Override
+	public int getCurrBno() {
+		return sql.selectOne(NS + "getCurrBno");
+	}
+
 }

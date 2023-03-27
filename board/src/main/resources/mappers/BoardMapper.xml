@@ -32,4 +32,8 @@
     <select id="getDetail" parameterType="int" resultType="bvo">
     	select * from board where bno = #{bno}
     </select>
+    
+    <select id="getCurrBno" resultType="int">
+    	select seq_board_bno.currval from dual
+    </select>
   </mapper>

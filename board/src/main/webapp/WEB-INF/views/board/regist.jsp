@@ -6,6 +6,7 @@
 <script>
 	$(document).ready(function() {
 		$('header .header .menu li:nth-child(1)').addClass('on');
+		
 		$('#regBtn').click(function(){
 			if($("#title").val() == "" || $("#title").val() == null){
 			    alert("제목을 입력해주세요.");
@@ -39,30 +40,37 @@
 			}
 		}
 		
-		$(document).on("change", "#file_up", function() {
+		$(document).on("change", "#files", function() {
 			$("button[type=submit]").attr("disabled", false);
-			let formObj = $("#file_up"); // 하나여도 배열로 가져옴
-			// console.log(formObj);
-			
+			let formObj = $("#files");
+			console.log(formObj);
 			let fileObjs = formObj[0].files; // file 객체들 가져옴
-			// console.log(fileObjs);
-			
+			console.log(fileObjs);
 			let fileZone = $("#fileZone");
+
 			fileZone.html("");
 			
+			var count = 0;
 			for (let fobj of fileObjs) {
 			      let li = '<li class="clearfix">';
 			      if(fileValidation(fobj.name, fobj.size)){
 			         // 성공
-			         li += '<p>' + fobj.name + '</p><button type="button" id="file_del"></button>';
+			         li += '<p>' + fobj.name + '</p><button type="button" id="fileDel_'+count+'" class="fileDel"></button>';
+			         count++;
 			      }else{
 			         // 실패
 			         return false;
 			      }
 			      fileZone.append(li);
 			   }
-			});
+		});
+		
+		$(document).on("click", ".fileDel", function() {
+		    	$(this).parent(".clearfix").remove();
+		    	$('#files').val("");
+		});
 	});
+	
 </script>
 <section class="">
 		<div class="container">
@@ -76,8 +84,8 @@
 							<input type="text" id="title" name="title" placeholder="제목(최대 100자)" maxlength="100">
 							<input type="text" id="writer" name="writer" placeholder="작성자" maxlength="20" style="margin-top: 10px">
 							<div class="file_up_box clearfix">
-								<input type="file" id="file_up">
-								<label for="file_up">파일 선택</label>
+								<input type="file" id="files" name="files" multiple>
+								<label for="files">파일 선택</label>
 								<p class="font_13 gray_txt">※ 파일은 최대 3개까지 총 20MB 까지 가능합니다.</p>
 							</div>
 							<ul class="clearfix file_up_list" id="fileZone">

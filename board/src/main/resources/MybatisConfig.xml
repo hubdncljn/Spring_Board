@@ -4,5 +4,6 @@
 	<typeAliases>
 		<typeAlias type="com.myweb.domain.BoardVO" alias="bvo"/>
 		<typeAlias type="com.myweb.domain.PageVO" alias="pgvo"/>
+		<typeAlias type="com.myweb.domain.FileVO" alias="fvo"/>
 	</typeAliases>
 </configuration>

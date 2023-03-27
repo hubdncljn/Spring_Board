@@ -1,6 +1,7 @@
 package com.myweb.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class BoardVO {
 	private int bno; // 게시판 번호
@@ -10,6 +11,8 @@ public class BoardVO {
 	private Date regdate; // 게시판 등록일
 	private Date moddate; // 게시판 수정일
 	private int readcount; // 조회수
+	private List<FileVO> flist; // 파일
+	
 	public int getReadcount() {
 		return readcount;
 	}
@@ -51,6 +54,12 @@ public class BoardVO {
 	}
 	public void setModdate(Date moddate) {
 		this.moddate = moddate;
+	}
+	public List<FileVO> getFlist() {
+		return flist;
+	}
+	public void setFlist(List<FileVO> flist) {
+		this.flist = flist;
 	}
 	@Override
 	public String toString() {

@@ -28,21 +28,23 @@
 							<p>${bvo.content }
 							</p>
 						</div>
+						
+						
 						<!-- 파일첨부했을시에 보임▼-->
-						<div class="file_box">
-							<p>첨부파일</p>
-							<ul class="clearfix">
-								<li>
-									<a href="" download>이미지1.jpg</a>
-								</li>
-								<li>
-									<a href="" download>문서.hwp</a>
-								</li>
-								<li>
-									<a href="" download>엑셀.xlsx</a>
-								</li>
-							</ul>
-						</div>
+						<c:if test="${bvo.flist.size() > 0 }">
+							<div class="file_box">
+								<p>첨부파일</p>
+								<ul class="clearfix">
+									<c:forEach items="${bvo.flist }" var="fvo">
+										<li>
+											<a href="" download>${fvo.fname }</a>
+										</li>
+									</c:forEach>
+								</ul>
+							</div>
+						</c:if>
+						
+						
 						<div class="btn_box rightT">
 							<button type="button" class="submit_btn" onclick="location.href='./notice_write.php'">수정</button>
 							<button type="button" class="btn border_btn">삭제</button>
