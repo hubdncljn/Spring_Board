@@ -1,0 +1,4 @@
+file upload path 변경 시 수정 해야하는 파일
+- web.xml 27번째 줄 -> location
+- FileProcessor.java 26번째 줄 -> UP_DIR
+- detail.jsp 43번째 줄 -> a 태그 href

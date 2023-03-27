@@ -17,7 +17,7 @@ public class BoardDaoImpl implements BoardDao {
 	private SqlSession sql;
 	
 	@Override
-	public int insert(BoardVO board) {
+	public int regist(BoardVO board) {
 		return sql.insert(NS + "regist", board);
 	}
 

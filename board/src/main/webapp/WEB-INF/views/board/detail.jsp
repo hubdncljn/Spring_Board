@@ -29,11 +29,9 @@
 							</ul>
 						</div>
 						<div class="bottom_box">
-							<p>${bvo.content }
-							</p>
+							<p>${bvo.content }</p>
 						</div>
-						
-						<!-- 파일첨부했을시에 보임▼-->
+						<!-- 파일첨부했을시에 보임 ▼-->
 						<c:if test="${bvo.flist.size() > 0 }">
 							<div class="file_box">
 								<p>첨부파일</p>
@@ -46,7 +44,6 @@
 								</ul>
 							</div>
 						</c:if>
-						
 						<div class="btn_box rightT">
 							<button type="button" class="submit_btn" onclick="location.href='/board/modify?bno=${bvo.bno }'">수정</button>
 							<button type="button" class="btn border_btn" id="delBtn">삭제</button>

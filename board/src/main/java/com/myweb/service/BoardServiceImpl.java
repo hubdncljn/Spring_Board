@@ -21,8 +21,8 @@ public class BoardServiceImpl implements BoardService {
 	private FileDao fdao;
 	
 	@Override
-	public int register(BoardVO board) {
-		return bdao.insert(board);
+	public int regist(BoardVO board) {
+		return bdao.regist(board);
 	}
 
 	@Override

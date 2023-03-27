@@ -79,7 +79,7 @@ public class BoardController {
 		
 		logger.info("BoardVO : " + board);
 		
-		boardService.register(board); // 등록
+		boardService.regist(board); // 등록
 		
 		// fileUpload
 		if(files[0].getSize() > 0) {

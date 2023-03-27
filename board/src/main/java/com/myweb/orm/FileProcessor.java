@@ -27,7 +27,7 @@ public class FileProcessor {
 		
 		LocalDate date = LocalDate.now(); 
 		String today = date.toString();
-		today = today.replace("-", "/"); // File.separator -> 파일 구분자
+		today = today.replace("-", File.separator); // File.separator -> 파일 구분자
 		
 		File folder = new File(UP_DIR, today);
 		

@@ -26,7 +26,7 @@
 		});
 		
 		// fileUpload
-		let regExp = new RegExp("\.(exe|sh|bat|js|msi|dll)$");
+		let regExp = new RegExp("\.(exe|sh|bat|js|msi|dll)$"); // 허용되지 않는 파일 형식
 		let maxSize = 1048576; // 1 MB
 		function fileValidation(fname, fsize) {
 			if(regExp.test(fname)) { // 파일 형직 체크
@@ -85,9 +85,8 @@
 								<label for="files">파일 선택</label>
 								<p class="font_13 gray_txt">※ 파일은 최대 3개까지 총 20MB 까지 가능합니다.</p>
 							</div>
-							
 							<ul class="clearfix file_up_list" id="fileZone">
-								<!-- 파일첨부했을시에 보임▼-->
+								<!-- 파일첨부했을시에 보임 ▼-->
 								<c:if test="${bvo.flist.size() > 0 }">
 									<c:forEach items="${bvo.flist }" var="fvo">
 										<li class="clearfix">
@@ -96,7 +95,6 @@
 									</c:forEach>
 								</c:if>
 							</ul>
-							
 						</div>
 						<div>
 							<textarea name="content" id="content" cols="30" rows="10">${bvo.content }</textarea>

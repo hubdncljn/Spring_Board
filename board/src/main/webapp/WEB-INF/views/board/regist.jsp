@@ -26,7 +26,7 @@
 		});
 		
 		// fileUpload
-		let regExp = new RegExp("\.(exe|sh|bat|js|msi|dll)$");
+		let regExp = new RegExp("\.(exe|sh|bat|js|msi|dll)$"); // 허용되지 않는 파일 형식
 		let maxSize = 1048576; // 1 MB
 		function fileValidation(fname, fsize) {
 			if(regExp.test(fname)) { // 파일 형직 체크
