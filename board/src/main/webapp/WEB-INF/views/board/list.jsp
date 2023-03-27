@@ -14,13 +14,15 @@
 			<h1 class="font_title">게시판</h1>
 		</div>
 		<div class="has_fixed_title contwrap">
-			<div class="clearfix2 search_box">
-				<p>총 ${totalCount }</p>
-				<div class="clearfix2 input_box">
-					<input type="text" placeholder="제목 검색">
-					<button type="button" class="btn border_btn">검색</button>
+			<form action="/board/list">
+				<div class="clearfix2 search_box">
+					<p>총 ${totalCount }</p>
+					<div class="clearfix2 input_box">
+						<input type="text" placeholder="제목 검색" name="keyword">
+						<button type="submit" class="btn border_btn">검색</button>
+					</div>
 				</div>
-			</div>
+			</form>
 			<table class="list_table table_fixed">
 				<colgroup>
 					<col width="70%">
@@ -68,16 +70,16 @@
 				<ul class="clearfix">
 					<!-- 이전페이지 버튼 -->
 					<c:if test="${pageMaker.prev}">
-						<li><a href="/board/list?pageNum=${pageMaker.startPage-1}"><img
+						<li><a href="/board/list?pageNum=${pageMaker.startPage-1}&keyword=${pageMaker.page.keyword }"><img
 								src="/resources/img/back_arrow.png" alt="전 페이지로"></a></li>
 					</c:if>
 					<!-- 각 페이지 버튼 -->
 					<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-						<li><a href="/board/list?pageNum=${num}" class="${pageMaker.page.pageNum == num ? "active":"" }">${num}</a></li>
+						<li><a href="/board/list?pageNum=${num}&keyword=${pageMaker.page.keyword }" class="${pageMaker.page.pageNum == num ? "active":"" }">${num}</a></li>
 					</c:forEach>
 					<!-- 다음페이지 버튼 -->
 					<c:if test="${pageMaker.next}">
-						<li><a href="/board/list?pageNum=${pageMaker.endPage + 1 }"><img
+						<li><a href="/board/list?pageNum=${pageMaker.endPage + 1 }&keyword=${pageMaker.page.keyword }"><img
 								src="/resources/img/front_arrow.png" alt="다음 페이지로"></a></li>
 					</c:if>
 				</ul>

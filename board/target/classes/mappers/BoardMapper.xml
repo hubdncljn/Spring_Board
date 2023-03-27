@@ -3,6 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="BoardMapper">
+  	<sql id="search">
+  		<if test="keyword != null">
+	  		<trim prefix="and (" suffix=")">
+				title like '%'||#{keyword}||'%'
+	 		</trim>
+ 		</if>
+  	</sql>
   	<!-- 등록 -->
  	<insert id="regist" parameterType="bvo">
         insert into board(bno, title, content, writer) values (seq_board_bno.nextval, #{title}, #{content}, #{writer})
@@ -18,14 +25,22 @@
     	<![CDATA[
 	        select bno, title, content, writer, regdate, moddate, readcount from(
 	               select /*+INDEX_DESC(board pk_board) */ rownum  as rn, bno, title, content, writer, regdate, moddate, readcount
-	               from board where rownum <= #{pageNum} * #{amount}) 
+	               from board where bno > 0
+	    ]]>       
+	    	<include refid="search"/>
+	    <![CDATA[ 
+	               and rownum <= #{pageNum} * #{amount}) 
 	        where rn > (#{pageNum} -1) * #{amount}
-	    	]]>
+	    ]]>
     </select>
     
     <!-- 총 게시글 수 -->
-    <select id="totalCount" resultType="int">
-    	select count(*) from board
+    <select id="totalCount" parameterType="pgvo" resultType="int">
+    	<![CDATA[ 
+	    	select count(*) from board
+	    	where bno > 0
+    	]]>
+    		<include refid="search"/>
     </select>
     
     <!-- 상세 조회 -->

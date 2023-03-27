@@ -32,8 +32,8 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int totalCount() {
-		return sql.selectOne(NS + "totalCount");
+	public int totalCount(PageVO pgvo) {
+		return sql.selectOne(NS + "totalCount" , pgvo);
 	}
 
 	@Override

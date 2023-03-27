@@ -36,8 +36,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int totalCount() {
-		return bdao.totalCount();
+	public int totalCount(PageVO pgvo) {
+		return bdao.totalCount(pgvo);
 	}
 
 	@Override
