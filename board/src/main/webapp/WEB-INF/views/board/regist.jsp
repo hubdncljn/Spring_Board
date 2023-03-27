@@ -53,7 +53,8 @@
 			      let li = '<li class="clearfix">';
 			      if(fileValidation(fobj.name, fobj.size)){
 			         // 성공
-			         li += '<p>' + fobj.name + '</p><button type="button" id="fileDel_'+count+'" class="fileDel"></button>';
+			         //li += '<p>' + fobj.name + '</p><button type="button" id="fileDel_'+count+'" class="fileDel"></button>';
+			         li += '<p>' + fobj.name + '</p><button type="button" id="fileDel" class="fileDel"></button>';
 			         count++;
 			      }else{
 			         // 실패
@@ -82,7 +83,7 @@
 							<input type="text" id="title" name="title" placeholder="제목(최대 100자)" maxlength="100">
 							<input type="text" id="writer" name="writer" placeholder="작성자" maxlength="20" style="margin-top: 10px">
 							<div class="file_up_box clearfix">
-								<input type="file" id="files" name="files" multiple>
+								<input type="file" id="files" name="files">
 								<label for="files">파일 선택</label>
 								<p class="font_13 gray_txt">※ 파일은 최대 3개까지 총 20MB 까지 가능합니다.</p>
 							</div>

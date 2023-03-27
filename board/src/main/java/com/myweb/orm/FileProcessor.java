@@ -23,11 +23,11 @@ public class FileProcessor {
 	private FileDao fdao;
 	
 	public void uploadFile(MultipartFile[] files, int bno) {
-		final String UP_DIR = "C:\\upload\\temp"; // 업로드 경로
+		final String UP_DIR = "C:\\Users\\HUBDNC-DEV\\git\\Spring_Board\\board\\src\\main\\webapp\\resources\\upload\\temp"; // 업로드 경로
 		
 		LocalDate date = LocalDate.now(); 
 		String today = date.toString();
-		today = today.replace("-", File.separator);
+		today = today.replace("-", "/"); // File.separator -> 파일 구분자
 		
 		File folder = new File(UP_DIR, today);
 		
@@ -35,7 +35,7 @@ public class FileProcessor {
 		
 		for (MultipartFile f : files) {
 			FileVO fvo = new FileVO();
-			fvo.setSavedir(UP_DIR + today);
+			fvo.setSavedir(today);
 			
 			String originalFileName = f.getOriginalFilename(); // 원래 파일 이름
 						

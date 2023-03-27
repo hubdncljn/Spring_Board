@@ -33,4 +33,9 @@ public class FileDaoImpl implements FileDao {
 		return sql.selectList(NS + "list", bno);
 	}
 
+	@Override
+	public int delete(int bno) {
+		return sql.delete(NS + "delete", bno);
+	}
+
 }

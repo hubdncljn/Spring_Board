@@ -46,4 +46,14 @@ public class BoardDaoImpl implements BoardDao {
 		return sql.selectOne(NS + "getCurrBno");
 	}
 
+	@Override
+	public int modify(BoardVO board) {
+		return sql.update(NS + "modify", board);
+	}
+
+	@Override
+	public int remove(int bno) {
+		return sql.delete(NS + "remove", bno);
+	}
+
 }

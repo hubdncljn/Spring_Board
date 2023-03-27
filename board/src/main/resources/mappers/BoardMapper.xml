@@ -37,4 +37,14 @@
     <select id="getCurrBno" resultType="int">
     	select seq_board_bno.currval from dual
     </select>
+    
+    <!-- 수정 -->
+    <update id="modify" parameterType="bvo">
+    	update board set title=#{title}, content=trim(#{content}), writer=#{writer},
+ 		moddate=sysdate where bno = #{bno}
+    </update>
+    
+    <delete id="remove" parameterType="int">
+    	delete from board where bno = #{bno}
+    </delete>
   </mapper>

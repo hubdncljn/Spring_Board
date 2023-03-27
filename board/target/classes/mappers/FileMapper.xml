@@ -17,4 +17,8 @@
   	<select id="list" parameterType="int" resultType="fvo">
   		select * from files where bno = #{bno}
   	</select>
+  	
+  	<delete id="delete" parameterType="int">
+  		delete from files where bno = #{bno} 
+  	</delete>
   </mapper>

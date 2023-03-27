@@ -6,6 +6,9 @@
 <script>
 	$(document).ready(function() {
 		$('header .header .menu li:nth-child(1)').addClass('on');
+		$("#delBtn").on("click", function() {
+			$("#delForm").submit();
+		});
 	});
 </script>
 	<section class="">
@@ -14,7 +17,8 @@
 				<h1 class="font_title">게시판</h1>
 			</div>
 			<div class="has_fixed_title detail_wrap">
-				<form action="">
+				<form action="/board/remove" id="delForm" method="post">
+					<input type="hidden" name="bno" id="bno" value="${bvo.bno }">
 					<div class="detail_box">
 						<div class="top_box clearfix2">
 							<p>${bvo.title }</p>
@@ -29,7 +33,6 @@
 							</p>
 						</div>
 						
-						
 						<!-- 파일첨부했을시에 보임▼-->
 						<c:if test="${bvo.flist.size() > 0 }">
 							<div class="file_box">
@@ -37,17 +40,16 @@
 								<ul class="clearfix">
 									<c:forEach items="${bvo.flist }" var="fvo">
 										<li>
-											<a href="" download>${fvo.fname }</a>
+											<a href="/resources/upload/temp/${fvo.savedir }/${fvo.uuid}_${fvo.fname}" download="${fvo.fname}">${fvo.fname }</a>
 										</li>
 									</c:forEach>
 								</ul>
 							</div>
 						</c:if>
 						
-						
 						<div class="btn_box rightT">
-							<button type="button" class="submit_btn" onclick="location.href='./notice_write.php'">수정</button>
-							<button type="button" class="btn border_btn">삭제</button>
+							<button type="button" class="submit_btn" onclick="location.href='/board/modify?bno=${bvo.bno }'">수정</button>
+							<button type="button" class="btn border_btn" id="delBtn">삭제</button>
 							<button type="button" class="btn border_btn" onclick="location.href='/board/list'">목록</button>
 						</div>
 					</div>
@@ -96,6 +98,4 @@
 			</div>
 		</div>
 	</section>
-<?php 
-	include_once('./include/footer.php');
-?>
+<jsp:include page="/resources/include/footer.jsp" />

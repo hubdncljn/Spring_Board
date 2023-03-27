@@ -56,4 +56,16 @@ public class BoardServiceImpl implements BoardService {
 		return bdao.getCurrBno();
 	}
 
+	@Override
+	public int modify(BoardVO board) {
+		fdao.delete(board.getBno()); // 기존 파일 삭제
+		return bdao.modify(board);
+	}
+
+	@Override
+	public int remove(int bno) {
+		fdao.delete(bno); // 기존 파일 삭제
+		return bdao.remove(bno);
+	}
+
 }

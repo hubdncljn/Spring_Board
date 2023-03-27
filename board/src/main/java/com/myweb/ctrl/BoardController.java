@@ -1,5 +1,14 @@
 package com.myweb.ctrl;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.net.URLEncoder;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.BufferedOutputStream;
 import com.myweb.domain.BoardVO;
 import com.myweb.domain.PageMakerDTO;
 import com.myweb.domain.PageVO;
@@ -81,10 +91,29 @@ public class BoardController {
 	}
 	
 	/* 게시글 상세 조회 */
-    @GetMapping("/detail")
+    @GetMapping({"/detail", "/modify"})
     public void boardDetailPage(int bno, Model model) {
         
         model.addAttribute("bvo", boardService.getDetail(bno));
         
     }
+    
+	/* 게시글 수정 */
+    @PostMapping("/modify")
+	public String modify(BoardVO board, RedirectAttributes reAtrr,
+			@RequestParam(name="files", required = false)MultipartFile[] files) {
+		boardService.modify(board);
+		if(files[0].getSize() > 0) {
+			fp.uploadFile(files, board.getBno()); // 파일 수정
+		}
+		return "redirect:/board/detail?bno=" + board.getBno(); // GET 방식
+	}
+    
+	/* 게시글 삭제 */
+    @PostMapping("/remove")
+	public String remove(@RequestParam("bno") int bno, RedirectAttributes reAttr) {
+		boardService.remove(bno);
+		return "redirect:/board/list";
+	}
+    
 }
