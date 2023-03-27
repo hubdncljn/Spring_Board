@@ -20,6 +20,9 @@ create table board(
     constraint pk_board PRIMARY key(bno)
 );
 
+-- 조회수 컬럼 추가
+alter table board add readcount number default 0;
+
 -- 시퀀스 생성
 create sequence seq_board_bno
 start with 1
@@ -38,3 +41,6 @@ constraint files primary key(uuid)
 -- 파일 fk (board bno , files bno)
 alter table files add constraint fk_file_bno
 foreign key (bno) references board (bno);
+
+-- 공지사항 컬럼 추가
+alter table board add notice number default 0;

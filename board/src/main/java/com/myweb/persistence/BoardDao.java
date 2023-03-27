@@ -14,4 +14,5 @@ public interface BoardDao {
 	public int getCurrBno(); // 현재 게시글 번호 조회
 	public int modify(BoardVO board); // 수정
 	public int remove(int bno); // 삭제
+	public void updateRC(int bno, int qty);
 }

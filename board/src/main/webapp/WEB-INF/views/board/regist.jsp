@@ -68,6 +68,14 @@
 		    	$(this).parent(".clearfix").remove();
 		    	$('#files').val("");
 		});
+		
+		$(document).on("change", "#notice", function() {
+			if($("input[name='notice']:checked").val() == null){
+				$("#notice").val("0");
+		    }else if($("input[name='notice']:checked").val() != null){
+		    	$("#notice").val("1");
+		    }
+		});
 	});
 	
 </script>
@@ -95,10 +103,10 @@
 							<textarea name="content" id="content" cols="30" rows="10"></textarea>
 							<ul class="check_wrap mt20">
 								<li class="mb10">
-									<input type="checkbox" id="notice_check"><label for="notice_check">공지사항으로 등록</label>
+									<input type="checkbox" id="notice" value="1" name="notice"><label for="notice">공지사항으로 등록</label>
 								</li>
 								<li>
-									<input type="checkbox" id="top_check"><label for="top_check">상단 고정게시글로 등록</label>
+									<input type="checkbox" id="top_check" name="notice"><label for="top_check">상단 고정게시글로 등록</label>
 								</li>
 							</ul>
 						</div>

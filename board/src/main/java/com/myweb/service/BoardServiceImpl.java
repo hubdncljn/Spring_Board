@@ -42,6 +42,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardVO getDetail(int bno) {
+		bdao.updateRC(bno, 1);
 		BoardVO bvo = bdao.getDetail(bno);
 		int fcnt = fdao.selectBno(bno);
 		if(fcnt > 0) { // 파일 유무 확인

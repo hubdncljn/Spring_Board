@@ -11,6 +11,8 @@ public class BoardVO {
 	private Date regdate; // 게시판 등록일
 	private Date moddate; // 게시판 수정일
 	private int readcount; // 조회수
+	private int notice; // 공지사항
+	
 	private List<FileVO> flist; // 파일
 	
 	public int getReadcount() {
@@ -54,6 +56,12 @@ public class BoardVO {
 	}
 	public void setModdate(Date moddate) {
 		this.moddate = moddate;
+	}
+	public int getNotice() {
+		return notice;
+	}
+	public void setNotice(int notice) {
+		this.notice = notice;
 	}
 	public List<FileVO> getFlist() {
 		return flist;

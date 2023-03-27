@@ -12,7 +12,7 @@
   	</sql>
   	<!-- 등록 -->
  	<insert id="regist" parameterType="bvo">
-        insert into board(bno, title, content, writer) values (seq_board_bno.nextval, #{title}, #{content}, #{writer})
+        insert into board(bno, title, content, writer, notice) values (seq_board_bno.nextval, #{title}, #{content}, #{writer}, #{notice})
     </insert>
     
     <!-- 목록 조회 페이징(X) -->
@@ -55,11 +55,17 @@
     
     <!-- 수정 -->
     <update id="modify" parameterType="bvo">
-    	update board set title=#{title}, content=trim(#{content}), writer=#{writer},
+    	update board set title=#{title}, content=trim(#{content}), writer=#{writer}, notice=#{notice}
  		moddate=sysdate where bno = #{bno}
     </update>
     
+    <!-- 삭제 -->
     <delete id="remove" parameterType="int">
     	delete from board where bno = #{bno}
     </delete>
+    
+    <!-- 조회수 -->
+    <update id="upReadCount" parameterType="hashmap">
+ 		update board set readcount = readcount + #{qty} where bno=#{bno}
+ 	</update>
   </mapper>
