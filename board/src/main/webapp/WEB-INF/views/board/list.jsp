@@ -70,17 +70,25 @@
 				<ul class="clearfix">
 					<!-- 이전페이지 버튼 -->
 					<c:if test="${pageMaker.prev}">
-						<li><a href="/board/list?pageNum=${pageMaker.startPage-1}&keyword=${pageMaker.page.keyword }"><img
-								src="/resources/img/back_arrow.png" alt="전 페이지로"></a></li>
+						<li>
+							<a href="/board/list?pageNum=${pageMaker.startPage-1}&keyword=${pageMaker.page.keyword }">
+								<img src="/resources/img/back_arrow.png" alt="전 페이지로">
+							</a>
+						</li>
 					</c:if>
 					<!-- 각 페이지 버튼 -->
 					<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-						<li><a href="/board/list?pageNum=${num}&keyword=${pageMaker.page.keyword }" class="${pageMaker.page.pageNum == num ? "active":"" }">${num}</a></li>
+						<li>
+							<a href="/board/list?pageNum=${num}&keyword=${pageMaker.page.keyword }" class="${pageMaker.page.pageNum == num ? "active":"" }">${num}</a>
+						</li>
 					</c:forEach>
 					<!-- 다음페이지 버튼 -->
 					<c:if test="${pageMaker.next}">
-						<li><a href="/board/list?pageNum=${pageMaker.endPage + 1 }&keyword=${pageMaker.page.keyword }"><img
-								src="/resources/img/front_arrow.png" alt="다음 페이지로"></a></li>
+						<li>
+							<a href="/board/list?pageNum=${pageMaker.endPage + 1 }&keyword=${pageMaker.page.keyword }">
+								<img src="/resources/img/front_arrow.png" alt="다음 페이지로">
+							</a>
+						</li>
 					</c:if>
 				</ul>
 			</div>
