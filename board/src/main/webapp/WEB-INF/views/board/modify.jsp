@@ -81,22 +81,21 @@
 							<input type="text" id="title" name="title" placeholder="제목(최대 100자)" maxlength="100" value="${bvo.title }">
 							<input type="text" id="writer" name="writer" placeholder="작성자" maxlength="20" style="margin-top: 10px" value="${bvo.writer }">
 							<div class="file_up_box clearfix">
-								<input type="file" id="files" name="files" multiple>
+								<input type="file" id="files" name="files">
 								<label for="files">파일 선택</label>
 								<p class="font_13 gray_txt">※ 파일은 최대 3개까지 총 20MB 까지 가능합니다.</p>
 							</div>
 							
-							<!-- 파일첨부했을시에 보임▼-->
-							<c:if test="${bvo.flist.size() > 0 }">
-								<p>첨부파일</p>
-								<ul class="clearfix file_up_list" id="fileZone">
+							<ul class="clearfix file_up_list" id="fileZone">
+								<!-- 파일첨부했을시에 보임▼-->
+								<c:if test="${bvo.flist.size() > 0 }">
 									<c:forEach items="${bvo.flist }" var="fvo">
 										<li class="clearfix">
 											<p>${fvo.fname }</p><button type="button" class="fileDel"></button>
 										</li>
 									</c:forEach>
-								</ul>
-							</c:if>
+								</c:if>
+							</ul>
 							
 						</div>
 						<div>
