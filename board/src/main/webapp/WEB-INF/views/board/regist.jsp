@@ -29,10 +29,10 @@
 		let regExp = new RegExp("\.(exe|sh|bat|js|msi|dll)$");
 		let maxSize = 1048576; // 1 MB
 		function fileValidation(fname, fsize) {
-			if(regExp.test(fname)) {
+			if(regExp.test(fname)) { // 파일 형직 체크
 				alert(fname + "(은)는 허용되지 않은 파일 형식입니다. ");
 				return false;
-			}else if(fsize > maxSize) {
+			}else if(fsize > maxSize) { // 파일 크기 체크
 				alert("1MB 이하의 파일만 허용됩니다!");
 				return false;
 			}else{
@@ -43,9 +43,7 @@
 		$(document).on("change", "#files", function() {
 			$("button[type=submit]").attr("disabled", false);
 			let formObj = $("#files");
-			console.log(formObj);
-			let fileObjs = formObj[0].files; // file 객체들 가져옴
-			console.log(fileObjs);
+			let fileObjs = formObj[0].files; // file 객체들
 			let fileZone = $("#fileZone");
 
 			fileZone.html("");

@@ -23,41 +23,39 @@ public class FileProcessor {
 	private FileDao fdao;
 	
 	public void uploadFile(MultipartFile[] files, int bno) {
-		final String UP_DIR = "C:\\upload\\temp";
+		final String UP_DIR = "C:\\upload\\temp"; // 업로드 경로
 		
-				LocalDate date = LocalDate.now(); 
-				String today = date.toString();
-				today = today.replace("-", File.separator);
-				
-				File folder = new File(UP_DIR, today);
-				
-				if(!folder.exists()) folder.mkdirs();
-				
-				for (MultipartFile f : files) {
-					FileVO fvo = new FileVO();
-					fvo.setSavedir(today);
-					
-					String originalFileName = f.getOriginalFilename(); // 원래 filename
-					logger.info(">>> originalFileName ? : " +originalFileName);
-								
-					fvo.setFname(originalFileName);
-					
-					UUID uuid = UUID.randomUUID(); // 유니크한 값
-					fvo.setUuid(uuid.toString());
-					
-					String fullFileName = uuid.toString() + "_" + originalFileName; // 실제로 만들어진 filename(저장되는 이름)
-					File storeFile = new File(folder, fullFileName);
-								
-					try {
-						f.transferTo(storeFile);
-					} catch (IllegalStateException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					fvo.setBno(bno);
-					fdao.insert(fvo);
-				}
+		LocalDate date = LocalDate.now(); 
+		String today = date.toString();
+		today = today.replace("-", File.separator);
+		
+		File folder = new File(UP_DIR, today);
+		
+		if(!folder.exists()) folder.mkdirs();
+		
+		for (MultipartFile f : files) {
+			FileVO fvo = new FileVO();
+			fvo.setSavedir(UP_DIR + today);
+			
+			String originalFileName = f.getOriginalFilename(); // 원래 파일 이름
+						
+			fvo.setFname(originalFileName);
+			
+			UUID uuid = UUID.randomUUID();
+			fvo.setUuid(uuid.toString());
+			
+			String fullFileName = uuid.toString() + "_" + originalFileName; // 저장되는 파일 이름 (UUID + 원래 파일 이름)
+			File storeFile = new File(folder, fullFileName);
+						
+			try {
+				f.transferTo(storeFile); // 업로드
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			fvo.setBno(bno); // 게시글 번호
+			fdao.insert(fvo); // 파일 등록
+		}
 	}
-
 }

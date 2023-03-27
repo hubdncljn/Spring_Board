@@ -67,5 +67,4 @@ public class BoardVO {
 				+ regdate + ", moddate=" + moddate + ", readcount=" + readcount + "]";
 	}
 	
-	
 }

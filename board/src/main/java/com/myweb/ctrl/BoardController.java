@@ -21,7 +21,7 @@ import com.myweb.service.BoardService;
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
-	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
 	@Autowired
 	private BoardService boardService;
@@ -44,7 +44,7 @@ public class BoardController {
     @GetMapping("/list")
     public void boardListPage(Model model, PageVO page) {
         
-        log.info("게시판 목록 페이지(페이징 O)");
+    	logger.info("게시판 목록 페이지(페이징 O)");
         
         model.addAttribute("list", boardService.getListPaging(page));
         
@@ -58,7 +58,7 @@ public class BoardController {
 	@GetMapping("/regist")
 	public void boardRegistPage() {
 
-		log.info("게시판 등록 페이지");
+		logger.info("게시판 등록 페이지");
 
 	}
 	
@@ -67,8 +67,7 @@ public class BoardController {
 	public String boardRegist(BoardVO board, RedirectAttributes rttr,
 			@RequestParam("files") MultipartFile[] files) {
 		
-		log.info("BoardVO : " + board);
-		System.err.println("********* files length " + files.length);
+		logger.info("BoardVO : " + board);
 		
 		boardService.register(board); // 등록
 		
@@ -81,7 +80,7 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	/* 게시판 조회 */
+	/* 게시글 상세 조회 */
     @GetMapping("/detail")
     public void boardDetailPage(int bno, Model model) {
         

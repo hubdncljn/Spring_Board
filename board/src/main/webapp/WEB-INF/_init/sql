@@ -31,7 +31,6 @@ create table files(
 uuid varchar2(200),
 savedir varchar2(200) not null,
 fname varchar2(1000) not null,
-ftype number(1) default 0,
 bno number(10),
 constraint files primary key(uuid)
 );

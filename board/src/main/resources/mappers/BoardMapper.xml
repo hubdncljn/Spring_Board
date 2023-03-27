@@ -33,6 +33,7 @@
     	select * from board where bno = #{bno}
     </select>
     
+    <!-- 현재 게시글 번호 조회 -->
     <select id="getCurrBno" resultType="int">
     	select seq_board_bno.currval from dual
     </select>
