@@ -6,10 +6,41 @@
 <script>
 	$(document).ready(function() {
 		$('header .header .menu li:nth-child(1)').addClass('on');
-		$("#delBtn").on("click", function() {
+		
+		$("#delBtn").click(function() {
 			$("#delForm").submit();
 		});
+		
+		// $(document).on("click", "#cmtBtn", write_comment);
 	});
+	function write_comment() {
+		let bno_val = $("#bno").val(); // bno
+		let writer_val = "관리자"; // writer
+		let content_val = $("#cmtContent").val(); // content
+		if(content_val == null || content_val == '') {
+			alert("댓글 내용을 입력하세요!");
+			return false;
+		} else {
+			let cmt_data ={
+				bno: bno_val,
+				writer: writer_val,
+				content: content_val
+			};
+			$.ajax({
+				url: "/comment/register",
+				type: "post",
+				data: JSON.stringify(cmt_data),
+				contentType: "application/json; charset=utf-8" // 전송 방식 json으로 변경!
+			}).done(function(result) {
+				alert("댓글 입력 성공");
+				list_comment(bno_val); // list 불러오려면 pno 필요~
+			}).fail(function(err) {
+				alert("댓글 입력 실패");
+			}).always(function() {
+				$("#cmtContent").val("");
+			});
+		}
+	}
 </script>
 	<section class="">
 		<div class="container">
@@ -62,33 +93,17 @@
 										<p>관리자</p>
 										<p class="date">2020-11-21 14:56</p>
 									</div>
-									<p>댓글의 내용입니다. 댓글은 최대 200자까지만 작성 가능합니다. 길어진다고 하더라도 말줄임은 없습니다. 200자는 최대한 표현이 가능하니까요.댓글의 내용입니다. 댓글은 최대 200자까지만 작성 가능합니다. 길어진다고 하더라도 말줄임은 없습니다. 200자는 최대한 표현이 가능하니까요.댓글의 내용입니다. 댓글은 최대 200자까지만 작성 가능합니다. 길어진다고 하더라도 말줄임은 없습니다. 200자는 최대한 표현이 가능하니까요.</p>
-								</div>
-								<!-- 자신이 작성한댓글일때만 삭제버튼 보임▼-->
-								<button type="button" class="delt_btn">
-									<img src="/resources/img/popclose.png" alt="삭제 아이콘">
-								</button>
-							</li>
-							<li class="clearfix">
-								<div class="img_box">
-									<img src="/resources/img/sample_profile.jpg" alt="프로필 이미지">
-								</div>
-								<div class="txt_box">
-									<div class="clearfix">
-										<p>관리자</p>
-										<p class="date">2020-11-21 14:56</p>
-									</div>
 									<p>댓글의 내용입니다. 댓글은 최대 200자까지만 작성 가능합니다. 길어진다고 하더라도 말줄임은 없습니다.</p>
 								</div>
-								<!-- 자신이 작성한댓글일때만 삭제버튼 보임▼-->
+								<!-- 자신이 작성한댓글일때만 삭제버튼 보임 ▼-->
 								<button type="button" class="delt_btn">
 									<img src="/resources/img/popclose.png" alt="삭제 아이콘">
 								</button>
 							</li>
 						</ul>
 						<div class="input_wrap clearfix2">
-							<input type="text" placeholder="댓글을 입력하세요 (최대 200자)" maxlength="200">
-							<button type="button" class="btn border_btn">댓글 등록</button>
+							<input type="text" placeholder="댓글을 입력하세요 (최대 200자)" maxlength="200" id="cmtContent">
+							<button type="button" class="btn border_btn" id="cmtBtn">댓글 등록</button>
 						</div>
 					</div>
 				</form>

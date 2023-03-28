@@ -18,7 +18,7 @@
 				<div class="clearfix2 search_box">
 					<p>총 ${totalCount }</p>
 					<div class="clearfix2 input_box">
-						<input type="text" placeholder="제목 검색" name="keyword">
+						<input type="text" placeholder="제목 검색" name="keyword" value="${pageMaker.page.keyword }">
 						<button type="submit" class="btn border_btn">검색</button>
 					</div>
 				</div>
@@ -63,8 +63,7 @@
 				</c:choose>
 			</table>
 			<div class="">
-				<button type="button" class="submit_btn"
-					onclick="location.href='/board/regist'">글쓰기</button>
+				<button type="button" class="submit_btn" onclick="location.href='/board/regist'">글쓰기</button>
 			</div>
 			<div class="pagination">
 				<ul class="clearfix">

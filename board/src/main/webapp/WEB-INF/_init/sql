@@ -44,3 +44,22 @@ foreign key (bno) references board (bno);
 
 -- 공지사항 컬럼 추가
 alter table board add notice number default 0;
+
+-- 댓글 테이블 추가
+create table cmt (
+cno number(10),
+bno number(10) not null,
+writer varchar2(100) not null,
+content varchar2(1000) not null,
+regdate date default sysdate,
+constraint pk_comment primary key(cno)
+);
+
+alter table cmt
+add constraint fk_comment_bno
+foreign key(bno) references board(bno);
+
+create sequence seq_comment_cno
+start with 1
+increment by 1
+nocycle nocache;

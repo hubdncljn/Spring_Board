@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="BoardMapper">
+  	<!-- 검색 -->
   	<sql id="search">
   		<if test="keyword != null">
 	  		<trim prefix="and (" suffix=")">
@@ -10,7 +11,7 @@
 	 		</trim>
  		</if>
   	</sql>
-  	<!-- 등록 -->
+  	<!-- 게시글 등록 -->
  	<insert id="regist" parameterType="bvo">
         insert into board(bno, title, content, writer, notice) values (seq_board_bno.nextval, #{title}, #{content}, #{writer}, #{notice})
     </insert>
@@ -24,7 +25,7 @@
     <select id="getListPaging" parameterType="pgvo" resultType="bvo">
     	<![CDATA[
 	        select bno, title, content, writer, regdate, moddate, readcount from(
-	               select /*+INDEX_DESC(board pk_board) */ rownum  as rn, bno, title, content, writer, regdate, moddate, readcount
+	               select /*+INDEX_DESC(board pk_board, notice) */ rownum  as rn, bno, title, content, writer, regdate, moddate, readcount
 	               from board where bno > 0
 	    ]]>       
 	    	<include refid="search"/>
@@ -53,13 +54,13 @@
     	select seq_board_bno.currval from dual
     </select>
     
-    <!-- 수정 -->
+    <!-- 게시글 수정 -->
     <update id="modify" parameterType="bvo">
-    	update board set title=#{title}, content=trim(#{content}), writer=#{writer}, notice=#{notice}
+    	update board set title=#{title}, content=trim(#{content}), writer=#{writer}, notice=#{notice},
  		moddate=sysdate where bno = #{bno}
     </update>
     
-    <!-- 삭제 -->
+    <!-- 게시글 삭제 -->
     <delete id="remove" parameterType="int">
     	delete from board where bno = #{bno}
     </delete>

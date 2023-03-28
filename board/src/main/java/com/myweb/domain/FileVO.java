@@ -1,11 +1,10 @@
 package com.myweb.domain;
 
 public class FileVO {
-	private String uuid;
-	private String savedir;
-	private String fname;
-	private String ftype;
-	private int bno;
+	private String uuid; // uuid
+	private String savedir; // 저장경로
+	private String fname; // 파일 이름
+	private int bno; // 게시글 번호
 	
 	public String getUuid() {
 		return uuid;
@@ -24,12 +23,6 @@ public class FileVO {
 	}
 	public void setFname(String fname) {
 		this.fname = fname;
-	}
-	public String getFtype() {
-		return ftype;
-	}
-	public void setFtype(String ftype) {
-		this.ftype = ftype;
 	}
 	public int getBno() {
 		return bno;
