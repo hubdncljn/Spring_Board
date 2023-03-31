@@ -30,10 +30,10 @@
 				url: "/comment/regist",
 				type: "post",
 				data: JSON.stringify(cmt_data),
-				contentType: "application/json; charset=utf-8" // 전송 방식 json으로 변경!
+				contentType: "application/json; charset=utf-8" 
 			}).done(function(result) {
 				alert("댓글 입력 성공");
-				list_comment(bno_val); // list 불러오려면 pno 필요~
+				list_comment(bno_val); 
 			}).fail(function(err) {
 				alert("댓글 입력 실패");
 			}).always(function() {
