@@ -11,7 +11,7 @@
 			$("#delForm").submit();
 		});
 		
-		// $(document).on("click", "#cmtBtn", write_comment);
+		$(document).on("click", "#cmtBtn", write_comment);
 	});
 	function write_comment() {
 		let bno_val = $("#bno").val(); // bno
@@ -27,7 +27,7 @@
 				content: content_val
 			};
 			$.ajax({
-				url: "/comment/register",
+				url: "/comment/regist",
 				type: "post",
 				data: JSON.stringify(cmt_data),
 				contentType: "application/json; charset=utf-8" // 전송 방식 json으로 변경!
