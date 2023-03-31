@@ -13,6 +13,7 @@
 		
 		$(document).on("click", "#cmtBtn", write_comment);
 	});
+	
 	function write_comment() {
 		let bno_val = $("#bno").val(); // bno
 		let writer_val = "관리자"; // writer
